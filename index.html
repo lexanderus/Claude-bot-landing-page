@@ -1322,7 +1322,10 @@
     <div class="container header__container">
       <a href="#" class="logo">
         <div class="logo__icon">🤖</div>
-        <span>Клот</span>
+        <div style="display:flex;flex-direction:column;gap:1px;">
+          <span>Клот</span>
+          <span style="font-size:0.6rem;font-weight:400;color:var(--color-muted);white-space:nowrap;">Страница создана при помощи Telegram бота</span>
+        </div>
       </a>
       
       <nav class="nav">
@@ -1396,7 +1399,32 @@
           </a>
         </div>
         
-        <p class="hero__hint">Нажмите /start — первый результат через 30 секунд</p>
+        <div class="hero__setup">
+          <div class="setup-card">
+            <div class="setup-card__header">
+              <span class="setup-card__icon">🤖</span>
+              <span class="setup-card__label">Как создать своего бота</span>
+            </div>
+            <div class="setup-card__steps">
+              <div class="setup-card__step">
+                <span class="setup-card__num">1</span>
+                <span>Откройте <strong>@BotFather</strong> в Telegram → /newbot → получите токен</span>
+              </div>
+              <div class="setup-card__step">
+                <span class="setup-card__num">2</span>
+                <span>Пришлите токен и свой <strong>user_id</strong> владельцу сервера</span>
+              </div>
+              <div class="setup-card__step">
+                <span class="setup-card__num">3</span>
+                <span>Владелец создаст systemd-юнит + изолированную базу знаний</span>
+              </div>
+              <div class="setup-card__step">
+                <span class="setup-card__num">4</span>
+                <span>Выберите модели через <strong>/model</strong> — бот готов!</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1467,35 +1495,53 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS (Act 2 — простота использования) -->
+  <!-- HOW IT WORKS (сценарии из базы знаний) -->
   <section class="section section--alt" id="how-it-works">
     <div class="container">
       <div class="section__header reveal">
         <div class="badge section__badge">
           <span>⚡</span>
-          <span>Просто</span>
+          <span>Сценарии</span>
         </div>
-        <h2 class="text-h1 section__title">Как это <span class="text-gradient">работает</span></h2>
-        <p class="text-body section__subtitle">Начните работу с AI-агентами за 3 простых шага</p>
+        <h2 class="text-h1 section__title">Что умеет <span class="text-gradient">Клот</span></h2>
+        <p class="text-body section__subtitle">Реальные сценарии из базы знаний бота — от транскрипции до деплоя</p>
       </div>
       
       <div class="steps">
         <div class="step reveal">
-          <div class="step__number">1</div>
-          <h3 class="text-h4 step__title">Напишите боту</h3>
-          <p class="step__desc">Откройте @KlotBot и нажмите /start. Никакой регистрации — мгновенный доступ.</p>
+          <div class="step__number">🎤</div>
+          <h3 class="text-h4 step__title">Транскрипция голоса и видео</h3>
+          <p class="step__desc">Отправьте голосовое сообщение, аудиофайл, видео или кружок — бот расшифрует через Whisper и сразу обсудит содержание.</p>
         </div>
         
         <div class="step reveal">
-          <div class="step__number">2</div>
-          <h3 class="text-h4 step__title">Выберите агента</h3>
-          <p class="step__desc">Используйте /agent для выбора из 250+ специалистов или позвольте боту подобрать под задачу.</p>
+          <div class="step__number">📄</div>
+          <h3 class="text-h4 step__title">Генерация Office-документов</h3>
+          <p class="step__desc">Попросите «сделай презентацию по этому видео», «сводку в Word» или «таблицу Excel» — бот соберёт и пришлёт готовый файл.</p>
         </div>
         
         <div class="step reveal">
-          <div class="step__number">3</div>
-          <h3 class="text-h4 step__title">Получите результат</h3>
-          <p class="step__desc">Опишите задачу простым языком. Агент выполнит работу за минуты, а не часы.</p>
+          <div class="step__number">🧠</div>
+          <h3 class="text-h4 step__title">Граф знаний и память</h3>
+          <p class="step__desc">Сохраняйте факты в базу знаний, задавайте вопросы через семантический поиск. Бот помнит контекст между диалогами.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">🐳</div>
+          <h3 class="text-h4 step__title">Мониторинг и DevOps</h3>
+          <p class="step__desc">Автофиксер отслеживает journalctl, при ошибке шлёт алерт в Telegram и предлагает исправление в отдельной ветке.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">🛠️</div>
+          <h3 class="text-h4 step__title">Запуск агентов-специалистов</h3>
+          <p class="step__desc">Выберите из 250+ профильных агентов: программист, маркетолог, юрист, аналитик — каждый с изолированным контекстом.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">🔐</div>
+          <h3 class="text-h4 step__title">Безопасный гостевой доступ</h3>
+          <p class="step__desc">Гости работают в изолированной базе знаний, без доступа к bash и VPS. Владельцы управляют лимитами и ключами.</p>
         </div>
       </div>
     </div>
