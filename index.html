@@ -1504,44 +1504,44 @@
           <span>Сценарии</span>
         </div>
         <h2 class="text-h1 section__title">Что умеет <span class="text-gradient">Клот</span></h2>
-        <p class="text-body section__subtitle">Реальные сценарии из базы знаний бота — от транскрипции до деплоя</p>
+        <p class="text-body section__subtitle">Реальные сценарии из документации бота v1.25 — от транскрипции до деплоя и биллинга</p>
       </div>
       
       <div class="steps">
         <div class="step reveal">
           <div class="step__number">🎤</div>
-          <h3 class="text-h4 step__title">Транскрипция голоса и видео</h3>
-          <p class="step__desc">Отправьте голосовое сообщение, аудиофайл, видео или кружок — бот расшифрует через Whisper и сразу обсудит содержание.</p>
+          <h3 class="text-h4 step__title">Транскрипция голоса, аудио и видео</h3>
+          <p class="step__desc">Whisper API — отправьте голосовое, кружок или видеофайл. Бот скачивает, транскрибирует, обсуждает содержание. Поддержка больших файлов с чанкингом до 50 МБ.</p>
         </div>
         
         <div class="step reveal">
           <div class="step__number">📄</div>
-          <h3 class="text-h4 step__title">Генерация Office-документов</h3>
-          <p class="step__desc">Попросите «сделай презентацию по этому видео», «сводку в Word» или «таблицу Excel» — бот соберёт и пришлёт готовый файл.</p>
+          <h3 class="text-h4 step__title">Intake-документов (v1.25)</h3>
+          <p class="step__desc">Любой файл стейджится в ~/inbox/intake/, задача из caption выполняется через полный чат-путь. PDF, DOCX, TXT — текст встраивается в память; zip и бинарники — модель читает инструментами.</p>
         </div>
         
         <div class="step reveal">
           <div class="step__number">🧠</div>
-          <h3 class="text-h4 step__title">Граф знаний и память</h3>
-          <p class="step__desc">Сохраняйте факты в базу знаний, задавайте вопросы через семантический поиск. Бот помнит контекст между диалогами.</p>
+          <h3 class="text-h4 step__title">Граф знаний (LightRAG)</h3>
+          <p class="step__desc">Voyage embeddings + семантический поиск. Сохраняйте факты, задавайте вопросы в hybrid/local/global-режимах. Бот помнит контекст между диалогами — личная база знаний каждого тенанта.</p>
         </div>
         
         <div class="step reveal">
           <div class="step__number">🐳</div>
-          <h3 class="text-h4 step__title">Мониторинг и DevOps</h3>
-          <p class="step__desc">Автофиксер отслеживает journalctl, при ошибке шлёт алерт в Telegram и предлагает исправление в отдельной ветке.</p>
+          <h3 class="text-h4 step__title">Автофиксер рантайм-багов</h3>
+          <p class="step__desc">Мониторит journalctl. При ошибке — алерт в Telegram, Claude создаёт ветку autofix/<id> и предлагает исправление. Push в main только после подтверждения. Semantic Versioning (SemVer).</p>
         </div>
         
         <div class="step reveal">
           <div class="step__number">🛠️</div>
-          <h3 class="text-h4 step__title">Запуск агентов-специалистов</h3>
-          <p class="step__desc">Выберите из 250+ профильных агентов: программист, маркетолог, юрист, аналитик — каждый с изолированным контекстом.</p>
+          <h3 class="text-h4 step__title">Оркестратор 250+ субагентов</h3>
+          <p class="step__desc">spawn_agent(role, task) — каждый агент выполняется в изолированном контексте с системным промптом из public.skills. Доступны: Code Reviewer, Security Engineer, Marketing Lead, FP&A Analyst и другие.</p>
         </div>
         
         <div class="step reveal">
-          <div class="step__number">🔐</div>
-          <h3 class="text-h4 step__title">Безопасный гостевой доступ</h3>
-          <p class="step__desc">Гости работают в изолированной базе знаний, без доступа к bash и VPS. Владельцы управляют лимитами и ключами.</p>
+          <div class="step__number">💳</div>
+          <h3 class="text-h4 step__title">Коммерческий биллинг (v1.17)</h3>
+          <p class="step__desc">Prepaid-биллинг через public.tenant_balance + billing_ledger. Гости имеют изолированную базу знаний и allowlist инструментов (chat_only). Блокировка на нулевом балансе — работа продолжается сразу после пополнения.</p>
         </div>
       </div>
     </div>
@@ -1636,48 +1636,16 @@
           <span>Управление</span>
         </div>
         <h2 class="text-h1 section__title">Команды <span class="text-gradient">бота</span></h2>
-        <p class="text-body section__subtitle">Основные команды для управления агентами и работой с ботом</p>
+        <p class="text-body section__subtitle">Все команды из реальной документации бота — от /start до /admin</p>
       </div>
       
       <div class="commands__grid">
         <div class="command-card reveal">
           <div class="command-card__header">
             <div class="command-card__icon">🤖</div>
-            <code class="command-card__name">/agent</code>
+            <code class="command-card__name">/start</code>
           </div>
-          <p class="command-card__desc">Выбор специализированного агента из каталога 250+ специалистов</p>
-        </div>
-        
-        <div class="command-card reveal">
-          <div class="command-card__header">
-            <div class="command-card__icon">💬</div>
-            <code class="command-card__name">/ask</code>
-          </div>
-          <p class="command-card__desc">Быстрый вопрос к текущему агенту без смены контекста</p>
-        </div>
-        
-        <div class="command-card reveal">
-          <div class="command-card__header">
-            <div class="command-card__icon">📎</div>
-            <code class="command-card__name">/file</code>
-          </div>
-          <p class="command-card__desc">Загрузка и анализ документов, изображений, таблиц</p>
-        </div>
-        
-        <div class="command-card reveal">
-          <div class="command-card__header">
-            <div class="command-card__icon">⚙️</div>
-            <code class="command-card__name">/settings</code>
-          </div>
-          <p class="command-card__desc">Настройки бота, язык, уведомления, предпочтения агентов</p>
-        </div>
-        
-        <div class="command-card reveal">
-          <div class="command-card__header">
-            <div class="command-card__icon">📊</div>
-            <code class="command-card__name">/stats</code>
-          </div>
-          <p class="command-card__desc">Статистика использования, расход токенов, история запросов</p>
+          <p class="command-card__desc">Приветствие и начало работы с ботом</p>
         </div>
         
         <div class="command-card reveal">
@@ -1685,7 +1653,119 @@
             <div class="command-card__icon">❓</div>
             <code class="command-card__name">/help</code>
           </div>
-          <p class="command-card__desc">Справка по командам, примеры использования, подсказки</p>
+          <p class="command-card__desc">Краткая справка по возможностям бота (для мастера — информация о «Компании»)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">📊</div>
+            <code class="command-card__name">/status</code>
+          </div>
+          <p class="command-card__desc">Текущая модель ИИ и состояние бота</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">🧠</div>
+            <code class="command-card__name">/model</code>
+          </div>
+          <p class="command-card__desc">Выбрать модель ИИ (GPT, Claude, DeepSeek, Gemini, OpenRouter)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">👤</div>
+            <code class="command-card__name">/profile</code>
+          </div>
+          <p class="command-card__desc">Сменить провайдера (каталог моделей)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">🆕</div>
+            <code class="command-card__name">/new</code>
+          </div>
+          <p class="command-card__desc">Новый разговор (сброс контекста)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">⏹</div>
+            <code class="command-card__name">/cancel</code>
+          </div>
+          <p class="command-card__desc">Прервать текущую задачу (флаг отмены)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">🏢</div>
+            <code class="command-card__name">/departments</code>
+          </div>
+          <p class="command-card__desc">Список отделов-специалистов (режим «Команды»)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">📚</div>
+            <code class="command-card__name">/kb</code>
+          </div>
+          <p class="command-card__desc">Долговременная память: посмотреть / удалить факты</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">🔑</div>
+            <code class="command-card__name">/keys</code>
+          </div>
+          <p class="command-card__desc">Статус ключей провайдеров (свой / мастера / отключён)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">➕</div>
+            <code class="command-card__name">/setkey</code>
+          </div>
+          <p class="command-card__desc">Добавить/заменить свой ключ (в т.ч. /setkey icloud — календарь)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">🗑</div>
+            <code class="command-card__name">/delkey</code>
+          </div>
+          <p class="command-card__desc">Убрать свой ключ провайдера</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">📅</div>
+            <code class="command-card__name">/gcalauth</code>
+          </div>
+          <p class="command-card__desc">Подключить Google Calendar (авторизация по коду)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">💳</div>
+            <code class="command-card__name">/usage</code>
+          </div>
+          <p class="command-card__desc">Расход: токены и стоимость по периодам</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">⚖️</div>
+            <code class="command-card__name">/balance</code>
+          </div>
+          <p class="command-card__desc">Баланс и пополнение (если включён биллинг)</p>
+        </div>
+        
+        <div class="command-card reveal">
+          <div class="command-card__header">
+            <div class="command-card__icon">🛠</div>
+            <code class="command-card__name">/admin</code>
+          </div>
+          <p class="command-card__desc">Настройка моделей и кросс-тенантная консоль (только для владельца)</p>
         </div>
       </div>
     </div>
