@@ -1298,6 +1298,186 @@
       color: var(--color-primary-900);
     }
 
+    /* ============ GUIDE MODAL ============ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--color-surface);
+      border-radius: var(--radius-xl);
+      max-width: 800px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-6) var(--space-8);
+      border-bottom: 1px solid var(--color-border-light);
+      position: sticky;
+      top: 0;
+      background: var(--color-surface);
+      z-index: 1;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+
+    .modal__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .modal__close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: var(--color-subtle);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .modal__close:hover {
+      background: var(--color-border);
+      color: var(--color-text-primary);
+    }
+
+    .modal__body {
+      padding: var(--space-6) var(--space-8);
+      line-height: 1.7;
+      color: var(--color-text-primary);
+    }
+
+    .modal__body h2 {
+      font-size: 1.375rem;
+      font-weight: 700;
+      margin: var(--space-6) 0 var(--space-3);
+      color: var(--color-text-heading);
+    }
+
+    .modal__body h2:first-child {
+      margin-top: 0;
+    }
+
+    .modal__body h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin: var(--space-4) 0 var(--space-2);
+      color: var(--color-text-heading);
+    }
+
+    .modal__body p {
+      margin-bottom: var(--space-3);
+      color: var(--color-text-secondary);
+    }
+
+    .modal__body ul {
+      margin: var(--space-2) 0 var(--space-4);
+      padding-left: var(--space-5);
+    }
+
+    .modal__body li {
+      margin-bottom: var(--space-2);
+      color: var(--color-text-secondary);
+      list-style: disc;
+    }
+
+    .modal__body blockquote {
+      background: var(--color-primary-50);
+      border-left: 4px solid var(--color-primary-400);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      margin: var(--space-4) 0;
+      color: var(--color-text-primary);
+    }
+
+    .modal__body code {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+      background: var(--color-subtle);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      color: var(--color-primary-600);
+    }
+
+    .modal__body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-4) 0;
+    }
+
+    .modal__body th, .modal__body td {
+      padding: var(--space-2) var(--space-3);
+      text-align: left;
+      border-bottom: 1px solid var(--color-border-light);
+      font-size: 0.9375rem;
+    }
+
+    .modal__body th {
+      font-weight: 600;
+      color: var(--color-text-heading);
+      background: var(--color-subtle);
+    }
+
+    .modal__body td {
+      color: var(--color-text-secondary);
+    }
+
+    .modal__body strong {
+      color: var(--color-text-heading);
+    }
+
+    @media (max-width: 640px) {
+      .modal__header, .modal__body {
+        padding: var(--space-4);
+      }
+    }
+
+    /* Scrollbar for modal */
+    .modal::-webkit-scrollbar {
+      width: 8px;
+    }
+    .modal::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .modal::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 4px;
+    }
+    .modal::-webkit-scrollbar-thumb:hover {
+      background: var(--color-muted);
+    }
+
     /* ============ REDUCED MOTION ============ */
     @media (prefers-reduced-motion: reduce) {
       *,
@@ -1495,7 +1675,7 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS (creative capabilities from KB) -->
+  <!-- HOW IT WORKS (сценарии из базы знаний) -->
   <section class="section section--alt" id="how-it-works">
     <div class="container">
       <div class="section__header reveal">
@@ -1504,56 +1684,44 @@
           <span>Сценарии</span>
         </div>
         <h2 class="text-h1 section__title">Что умеет <span class="text-gradient">Клот</span></h2>
-        <p class="text-body section__subtitle">От разговоров с ИИ до деплоя на сервер — всё в одном диалоге</p>
+        <p class="text-body section__subtitle">Реальные сценарии из базы знаний бота — от транскрипции до деплоя</p>
       </div>
       
-      <div class="features__grid">
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--purple">🧠</div>
-          <h3 class="feature-card__title">Мульти-мозг</h3>
-          <p class="feature-card__desc">GPT / Claude / DeepSeek / Gemini / OpenRouter — выбирайте модель под задачу. Контекстная память, сброс через /new, провайдер через /profile.</p>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step__number">🎤</div>
+          <h3 class="text-h4 step__title">Транскрипция голоса и видео</h3>
+          <p class="step__desc">Отправьте голосовое сообщение, аудиофайл, видео или кружок — бот расшифрует через Whisper и сразу обсудит содержание.</p>
         </div>
         
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--pink">🎙</div>
-          <h3 class="feature-card__title">Медиа-центр</h3>
-          <p class="feature-card__desc">Голос → текст, видео → субтитры (Whisper, чанкинг до 50 MB). Генерация картинок (Gemini 2.5 Flash). Office-документы: Word, Excel, PowerPoint — за секунду.</p>
+        <div class="step reveal">
+          <div class="step__number">📄</div>
+          <h3 class="text-h4 step__title">Генерация Office-документов</h3>
+          <p class="step__desc">Попросите «сделай презентацию по этому видео», «сводку в Word» или «таблицу Excel» — бот соберёт и пришлёт готовый файл.</p>
         </div>
         
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--cyan">🌐</div>
-          <h3 class="feature-card__title">Интернет + данные</h3>
-          <p class="feature-card__desc">Поиск в вебе (Exa AI), bash на VPS, Supabase-аудит, календарь (iCloud + Google), напоминания по расписанию.</p>
+        <div class="step reveal">
+          <div class="step__number">🧠</div>
+          <h3 class="text-h4 step__title">Граф знаний и память</h3>
+          <p class="step__desc">Сохраняйте факты в базу знаний, задавайте вопросы через семантический поиск. Бот помнит контекст между диалогами.</p>
         </div>
         
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--green">👥</div>
-          <h3 class="feature-card__title">Армия агентов</h3>
-          <p class="feature-card__desc">250+ субагентов: Code Reviewer, Security Engineer, Marketing Lead, FP&A Analyst, UX Architect и другие. Отделы-дирижёры и конвейеры для сложных проектов.</p>
+        <div class="step reveal">
+          <div class="step__number">🐳</div>
+          <h3 class="text-h4 step__title">Мониторинг и DevOps</h3>
+          <p class="step__desc">Автофиксер отслеживает journalctl, при ошибке шлёт алерт в Telegram и предлагает исправление в отдельной ветке.</p>
         </div>
         
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--amber">💾</div>
-          <h3 class="feature-card__title">Вечная память</h3>
-          <p class="feature-card__desc">LightRAG граф знаний с семантическим поиском (hybrid / local / global). Сохраняйте факты между диалогами. Еженедельная сводка с событиями календаря.</p>
+        <div class="step reveal">
+          <div class="step__number">🛠️</div>
+          <h3 class="text-h4 step__title">Запуск агентов-специалистов</h3>
+          <p class="step__desc">Выберите из 250+ профильных агентов: программист, маркетолог, юрист, аналитик — каждый с изолированным контекстом.</p>
         </div>
         
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--indigo">🔒</div>
-          <h3 class="feature-card__title">Твоя песочница</h3>
-          <p class="feature-card__desc">Изоляция тенантов — каждый в своей базе знаний. Свои / мастер-ключи (🤝). Биллинг $, prepaid, статистика /usage. Блокировка на нуле — включение сразу после пополнения.</p>
-        </div>
-        
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--rose">🛠</div>
-          <h3 class="feature-card__title">Продвинутые инструменты</h3>
-          <p class="feature-card__desc">Deep Research (5 агентов: веб + YouTube + конкурентная разведка). Code Review, Git-деплой, проект-менеджер, калькулятор, intake документов (PDF/DOCX/TXT/zip).</p>
-        </div>
-        
-        <div class="feature-card reveal">
-          <div class="feature-card__icon feature-card__icon--blue">🐳</div>
-          <h3 class="feature-card__title">Автофиксер</h3>
-          <p class="feature-card__desc">Мониторинг journalctl. При падении — алерт в Telegram, Claude создаёт ветку autofix/&lt;id&gt; с исправлением. Push в main только после вашего OK. SemVer.</p>
+        <div class="step reveal">
+          <div class="step__number">🔐</div>
+          <h3 class="text-h4 step__title">Безопасный гостевой доступ</h3>
+          <p class="step__desc">Гости работают в изолированной базе знаний, без доступа к bash и VPS. Владельцы управляют лимитами и ключами.</p>
         </div>
       </div>
     </div>
@@ -1648,13 +1816,13 @@
           <span>Управление</span>
         </div>
         <h2 class="text-h1 section__title">Команды <span class="text-gradient">бота</span></h2>
-        <p class="text-body section__subtitle">Все команды из реальной документации бота — от /start до /admin</p>
+        <p class="text-body section__subtitle">16 команд для управления ботом — от выбора модели до календаря и статистики</p>
       </div>
       
       <div class="commands__grid">
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">🤖</div>
+            <div class="command-card__icon">👋</div>
             <code class="command-card__name">/start</code>
           </div>
           <p class="command-card__desc">Приветствие и начало работы с ботом</p>
@@ -1662,18 +1830,18 @@
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">❓</div>
+            <div class="command-card__icon">ℹ️</div>
             <code class="command-card__name">/help</code>
           </div>
-          <p class="command-card__desc">Краткая справка по возможностям бота (для мастера — информация о «Компании»)</p>
+          <p class="command-card__desc">Краткая справка по возможностям бота</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">📊</div>
+            <div class="command-card__icon">📟</div>
             <code class="command-card__name">/status</code>
           </div>
-          <p class="command-card__desc">Текущая модель ИИ и состояние бота</p>
+          <p class="command-card__desc">Текущая модель, провайдер и количество сообщений в контексте</p>
         </div>
         
         <div class="command-card reveal">
@@ -1681,23 +1849,23 @@
             <div class="command-card__icon">🧠</div>
             <code class="command-card__name">/model</code>
           </div>
-          <p class="command-card__desc">Выбрать модель ИИ (GPT, Claude, DeepSeek, Gemini, OpenRouter)</p>
+          <p class="command-card__desc">Выбрать модель ИИ из списка (GPT, Claude, DeepSeek, Gemini)</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">👤</div>
+            <div class="command-card__icon">🔄</div>
             <code class="command-card__name">/profile</code>
           </div>
-          <p class="command-card__desc">Сменить провайдера (каталог моделей)</p>
+          <p class="command-card__desc">Сменить провайдера (Google / OpenRouter / Anthropic)</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">🆕</div>
+            <div class="command-card__icon">🗑</div>
             <code class="command-card__name">/new</code>
           </div>
-          <p class="command-card__desc">Новый разговор (сброс контекста)</p>
+          <p class="command-card__desc">Новый разговор — сброс контекста + кнопка «сохранить резюме в память»</p>
         </div>
         
         <div class="command-card reveal">
@@ -1705,7 +1873,7 @@
             <div class="command-card__icon">⏹</div>
             <code class="command-card__name">/cancel</code>
           </div>
-          <p class="command-card__desc">Прервать текущую задачу (флаг отмены)</p>
+          <p class="command-card__desc">Прервать текущую задачу, которую бот сейчас выполняет</p>
         </div>
         
         <div class="command-card reveal">
@@ -1713,15 +1881,15 @@
             <div class="command-card__icon">🏢</div>
             <code class="command-card__name">/departments</code>
           </div>
-          <p class="command-card__desc">Список отделов-специалистов (режим «Команды»)</p>
+          <p class="command-card__desc">Список доступных отделов-специалистов (режим «Команды»)</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">📚</div>
+            <div class="command-card__icon">💾</div>
             <code class="command-card__name">/kb</code>
           </div>
-          <p class="command-card__desc">Долговременная память: посмотреть / удалить факты</p>
+          <p class="command-card__desc">Долговременная память: просмотр, поиск, удаление фактов</p>
         </div>
         
         <div class="command-card reveal">
@@ -1729,23 +1897,23 @@
             <div class="command-card__icon">🔑</div>
             <code class="command-card__name">/keys</code>
           </div>
-          <p class="command-card__desc">Статус ключей провайдеров (свой / мастера / отключён)</p>
+          <p class="command-card__desc">Статус ключей провайдеров (свой / одолжен мастером / недоступен)</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">➕</div>
+            <div class="command-card__icon">🔐</div>
             <code class="command-card__name">/setkey</code>
           </div>
-          <p class="command-card__desc">Добавить/заменить свой ключ (в т.ч. /setkey icloud — календарь)</p>
+          <p class="command-card__desc">Добавить / заменить свой ключ провайдера (Google, OpenRouter, Claude, Deepgram)</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">🗑</div>
+            <div class="command-card__icon">🚫</div>
             <code class="command-card__name">/delkey</code>
           </div>
-          <p class="command-card__desc">Убрать свой ключ провайдера</p>
+          <p class="command-card__desc">Убрать свой ключ — вернуться на ключ владельца</p>
         </div>
         
         <div class="command-card reveal">
@@ -1758,15 +1926,15 @@
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">💳</div>
+            <div class="command-card__icon">📊</div>
             <code class="command-card__name">/usage</code>
           </div>
-          <p class="command-card__desc">Расход: токены и стоимость по периодам</p>
+          <p class="command-card__desc">Статистика расхода: токены и стоимость по периодам, разбивка по ключам</p>
         </div>
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">⚖️</div>
+            <div class="command-card__icon">💰</div>
             <code class="command-card__name">/balance</code>
           </div>
           <p class="command-card__desc">Баланс и пополнение (если включён биллинг)</p>
@@ -1774,11 +1942,19 @@
         
         <div class="command-card reveal">
           <div class="command-card__header">
-            <div class="command-card__icon">🛠</div>
+            <div class="command-card__icon">⚙️</div>
             <code class="command-card__name">/admin</code>
           </div>
-          <p class="command-card__desc">Настройка моделей и кросс-тенантная консоль (только для владельца)</p>
+          <p class="command-card__desc">Настройка моделей для админа бота</p>
         </div>
+      </div>
+      
+      <div style="text-align:center;margin-top:var(--space-8);">
+        <button class="btn btn-primary btn-lg" onclick="document.getElementById('guideModal').classList.add('active')" style="cursor:pointer;">
+          <span>📖</span>
+          <span>Полная инструкция пользователя</span>
+        </button>
+        <p class="text-small" style="margin-top:var(--space-3);">Настройки, календарь, BYOK, транскрипция — всё в одном гайде</p>
       </div>
     </div>
   </section>
@@ -1861,6 +2037,134 @@
       </div>
     </div>
   </section>
+
+  <!-- GUIDE MODAL -->
+  <div class="modal-overlay" id="guideModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Полная инструкция пользователя">
+      <div class="modal__header">
+        <div class="modal__title">📖 Полная инструкция пользователя</div>
+        <button class="modal__close" onclick="document.getElementById('guideModal').classList.remove('active')" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal__body">
+        <h2>Как пользоваться ботом — инструкция для гостя</h2>
+
+        <p>Это твой личный ИИ-ассистент в Telegram на базе Claude. Просто пиши ему — как другу в переписке.</p>
+
+        <blockquote>Твой бот изолирован: твоя переписка и память видны только тебе, другие пользователи и владелец сервера их не читают.</blockquote>
+
+        <blockquote><strong>⚙️ Главное меню — <code>/menu</code>.</strong> Все настройки собраны в одной панели: модель, провайдер, ключи, память, расход, статус.</blockquote>
+
+        <h3>1. Обычный разговор</h3>
+        <p>Просто напиши сообщение — бот ответит. Он помнит ход беседы.</p>
+        <ul>
+          <li><code>/new</code> — начать новый разговор с чистого листа</li>
+          <li><code>/cancel</code> — прервать то, что бот сейчас делает</li>
+          <li>Если ответ длинный — бот пришлёт его файлом <code>.txt</code></li>
+        </ul>
+
+        <h3>2. Голосовые, аудио и видео → текст</h3>
+        <p>Отправь голосовое сообщение, аудиофайл или видео — бот распознает речь (Whisper).</p>
+        <p><strong>🔊 Голосовые ответы:</strong> напиши голосовым — бот ответит голосом. Включи <code>/tts on</code>, чтобы озвучивать любые ответы.</p>
+        <p><strong>Транскрипт + действие:</strong> приложи к видео инструкцию — бот расшифрует и выполнит (сделает презентацию, конспект, перевод).</p>
+
+        <h3>3. Картинки</h3>
+        <ul>
+          <li>Прислал фото → бот опишет, ответит на вопросы</li>
+          <li>Попросил нарисовать → бот сгенерирует изображение</li>
+          <li>Прислал фото + просьба изменить → бот отредактирует</li>
+        </ul>
+
+        <h3>4. Документы</h3>
+        <p>Отправь файл (PDF, Word, Excel, PowerPoint, txt) — бот прочитает и ответит по содержимому.</p>
+
+        <h3>5. Генерация файлов</h3>
+        <ul>
+          <li>«Сделай презентацию про X на 5 слайдов» → <code>.pptx</code></li>
+          <li>«Оформи это документом Word» → <code>.docx</code></li>
+          <li>«Собери таблицу Excel» → <code>.xlsx</code> (с формулами)</li>
+        </ul>
+
+        <h3>6. Скачивание по ссылке</h3>
+        <p>Пришли ссылку (YouTube, Vimeo, Google Drive, Dropbox) — бот скачает и обработает. Большие файлы до ~2 ГБ.</p>
+
+        <h3>7. Долговременная память 🧠</h3>
+        <ul>
+          <li>«Запомни, что …» / «Сохрани, что …» — запишет в базу знаний</li>
+          <li>«Что я говорил про X?» / «Помнишь про …?» — найдёт</li>
+          <li>«Забудь про X» — удалит конкретное</li>
+          <li><code>/kb</code> — открыть память, посмотреть, что хранится</li>
+        </ul>
+
+        <h3>8. Выбор модели и провайдера</h3>
+        <ul>
+          <li><code>/model</code> — выбрать модель (💰 = платная/мощнее)</li>
+          <li><code>/profile</code> — сменить провайдера</li>
+          <li><code>/status</code> — какая модель активна</li>
+        </ul>
+
+        <h3>9. Свои ключи (BYOK)</h3>
+        <ul>
+          <li><code>/keys</code> — статус: 🔑 свой / 🤝 мастера / ⛔ недоступен</li>
+          <li><code>/setkey</code> — добавить свой ключ провайдера</li>
+          <li><code>/delkey</code> — убрать свой ключ</li>
+        </ul>
+
+        <h3>10. Календарь 📅 (iCloud + Google)</h3>
+        <p>Подключи iCloud или Google — управляй событиями из чата. <code>/menu → 📅 Календарь</code></p>
+        <ul>
+          <li>«Что запланировано на неделе?» — покажет события</li>
+          <li>«Создай встречу … завтра в 15:00» — добавит</li>
+          <li>«Перенеси … на 16:00» / «Переименуй» / «Удали»</li>
+          <li>«Напоминай каждый день в 9:00» — повтор (только Google)</li>
+        </ul>
+
+        <h3>11. Сколько потрачено</h3>
+        <p><code>/usage</code> — токены и стоимость за сегодня / 7 / 30 дней. <code>/balance</code> — баланс и пополнение.</p>
+
+        <h3>11a. Еженедельная сводка 📅</h3>
+        <p>Раз в неделю — дайджест: что сохранил в память, события календаря, что нового в боте.</p>
+
+        <h3>12. Команды одним списком</h3>
+        <table>
+          <tr><th>Команда</th><th>Что делает</th></tr>
+          <tr><td><code>/start</code></td><td>приветствие</td></tr>
+          <tr><td><code>/help</code></td><td>краткая справка</td></tr>
+          <tr><td><code>/status</code></td><td>текущая модель и состояние</td></tr>
+          <tr><td><code>/model</code></td><td>выбрать модель ИИ</td></tr>
+          <tr><td><code>/profile</code></td><td>сменить провайдера</td></tr>
+          <tr><td><code>/new</code></td><td>новый разговор (сброс контекста)</td></tr>
+          <tr><td><code>/cancel</code></td><td>прервать текущую задачу</td></tr>
+          <tr><td><code>/departments</code></td><td>список отделов-специалистов</td></tr>
+          <tr><td><code>/kb</code></td><td>долговременная память</td></tr>
+          <tr><td><code>/keys</code></td><td>статус ключей провайдеров</td></tr>
+          <tr><td><code>/setkey</code></td><td>добавить/заменить ключ</td></tr>
+          <tr><td><code>/delkey</code></td><td>убрать свой ключ</td></tr>
+          <tr><td><code>/gcalauth</code></td><td>подключить Google Calendar</td></tr>
+          <tr><td><code>/usage</code></td><td>расход токенов и стоимость</td></tr>
+          <tr><td><code>/balance</code></td><td>баланс и пополнение</td></tr>
+          <tr><td><code>/admin</code></td><td>настройка моделей (админ)</td></tr>
+        </table>
+
+        <h3>13. Как завести такого бота</h3>
+        <p><strong>Шаг 1.</strong> Открой <a href="https://t.me/BotFather" target="_blank">@BotFather</a>, отправь <code>/newbot</code>, получи токен.</p>
+        <p><strong>Шаг 2.</strong> Напиши <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a> — узнай свой user_id.</p>
+        <p><strong>Шаг 3.</strong> Отправь токен и user_id владельцу сервера или в чат <strong>@VPSAndromedaBot</strong>.</p>
+
+        <h3>Команда специалистов</h3>
+        <p>Если владелец включил режим «команды» — на сложную задачу бот привлекает узких агентов. <code>/departments</code> — список отделов.</p>
+
+        <h3>Чего бот не делает</h3>
+        <p>Не хранит твои файлы на сервере (обрабатывает «на лету»). Не выполняет команды на сервере (только мастер-версия).</p>
+
+        <h3>Если что-то не работает</h3>
+        <ul>
+          <li>Бот молчит → напиши владельцу сервера</li>
+          <li>Не дошёл большой файл → сообщи владельцу</li>
+          <li>Ошибка модели → попробуй <code>/model</code> другую модель</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
