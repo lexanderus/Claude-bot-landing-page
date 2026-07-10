@@ -759,12 +759,19 @@
     /* ============ HOW IT WORKS ============ */
     .steps {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-10);
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
       position: relative;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-6);
+      }
+    }
+
+    @media (max-width: 640px) {
       .steps {
         grid-template-columns: 1fr;
         gap: var(--space-8);
@@ -1675,7 +1682,7 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS (сценарии из базы знаний) -->
+  <!-- HOW IT WORKS (сценарии из базы знаний — v2: fresh KB content) -->
   <section class="section section--alt" id="how-it-works">
     <div class="container">
       <div class="section__header reveal">
@@ -1684,44 +1691,56 @@
           <span>Сценарии</span>
         </div>
         <h2 class="text-h1 section__title">Что умеет <span class="text-gradient">Клот</span></h2>
-        <p class="text-body section__subtitle">Реальные сценарии из базы знаний бота — от транскрипции до деплоя</p>
+        <p class="text-body section__subtitle">Реальные сценарии из базы знаний бота — от разговоров с ИИ до деплоя на сервер</p>
       </div>
       
       <div class="steps">
         <div class="step reveal">
-          <div class="step__number">🎤</div>
-          <h3 class="text-h4 step__title">Транскрипция голоса и видео</h3>
-          <p class="step__desc">Отправьте голосовое сообщение, аудиофайл, видео или кружок — бот расшифрует через Whisper и сразу обсудит содержание.</p>
+          <div class="step__number">🤖</div>
+          <h3 class="text-h4 step__title">Разговоры с ИИ</h3>
+          <p class="step__desc">Поддержка моделей GPT, Claude, DeepSeek, Gemini, OpenRouter. Контекстная память (сброс через <code>/new</code>), выбор провайдера через <code>/profile</code>.</p>
         </div>
         
         <div class="step reveal">
-          <div class="step__number">📄</div>
-          <h3 class="text-h4 step__title">Генерация Office-документов</h3>
-          <p class="step__desc">Попросите «сделай презентацию по этому видео», «сводку в Word» или «таблицу Excel» — бот соберёт и пришлёт готовый файл.</p>
+          <div class="step__number">🎤</div>
+          <h3 class="text-h4 step__title">Мультимедиа</h3>
+          <p class="step__desc">Транскрибация голоса и видео (Whisper API). Генерация картинок Gemini 2.5 Flash. Сборка Office-документов: Word, Excel, PowerPoint — одной просьбой.</p>
         </div>
         
         <div class="step reveal">
           <div class="step__number">🧠</div>
-          <h3 class="text-h4 step__title">Граф знаний и память</h3>
-          <p class="step__desc">Сохраняйте факты в базу знаний, задавайте вопросы через семантический поиск. Бот помнит контекст между диалогами.</p>
+          <h3 class="text-h4 step__title">База знаний (LightRAG)</h3>
+          <p class="step__desc">Личная долговременная память: сохраняет факты, проекты, заметки. Граф знаний с семантическим поиском (hybrid / local / global / naive). Команда <code>/kb</code> — просмотр, удаление, очистка. Еженедельная сводка с календарём.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">🏢</div>
+          <h3 class="text-h4 step__title">Отделы (режим «Команды»)</h3>
+          <p class="step__desc">250+ специализированных агентов: Product Strategy, Marketing, Finance, Engineering, Security, HR, Design, Game Dev и др. Отделы-дирижёры (Analytics Reporter, Backend Architect, Chief of Staff) с конвейерной передачей задач.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">🛠</div>
+          <h3 class="text-h4 step__title">Инструменты</h3>
+          <p class="step__desc">Поиск в вебе Exa AI + fetch, выполнение bash-команд на VPS, аудит Supabase (SQL, RLS), календарь iCloud+Google, напоминания по расписанию (schedule_job). Всё из одного чата.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">💳</div>
+          <h3 class="text-h4 step__title">Безопасность и биллинг</h3>
+          <p class="step__desc">Изоляция тенантов — у каждого своя база знаний. Ключи провайдеров: свои (🔑) или одолженные мастером (🤝). Баланс в $, пополнение через владельца. Статистика расхода <code>/usage</code> — токены, картинки, голос по периодам.</p>
+        </div>
+        
+        <div class="step reveal">
+          <div class="step__number">📋</div>
+          <h3 class="text-h4 step__title">Что ещё умеет</h3>
+          <p class="step__desc">Калькулятор (арифметика, функции, память переменных). Чтение/запись файлов проекта (persistent workspace). Проверка кода (Code Review agent). Git — клонирование, коммиты, пуши. Deep Research — 5 агентов собирают веб + YouTube + конкурентов.</p>
         </div>
         
         <div class="step reveal">
           <div class="step__number">🐳</div>
-          <h3 class="text-h4 step__title">Мониторинг и DevOps</h3>
-          <p class="step__desc">Автофиксер отслеживает journalctl, при ошибке шлёт алерт в Telegram и предлагает исправление в отдельной ветке.</p>
-        </div>
-        
-        <div class="step reveal">
-          <div class="step__number">🛠️</div>
-          <h3 class="text-h4 step__title">Запуск агентов-специалистов</h3>
-          <p class="step__desc">Выберите из 250+ профильных агентов: программист, маркетолог, юрист, аналитик — каждый с изолированным контекстом.</p>
-        </div>
-        
-        <div class="step reveal">
-          <div class="step__number">🔐</div>
-          <h3 class="text-h4 step__title">Безопасный гостевой доступ</h3>
-          <p class="step__desc">Гости работают в изолированной базе знаний, без доступа к bash и VPS. Владельцы управляют лимитами и ключами.</p>
+          <h3 class="text-h4 step__title">Автофиксер</h3>
+          <p class="step__desc">Мониторинг journalctl → при ошибке создаётся ветка <code>autofix/&lt;id&gt;</code> с исправлением. Алерты в Telegram, предложение починить — без твоего участия.</p>
         </div>
       </div>
     </div>
