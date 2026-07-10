@@ -1495,7 +1495,7 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS (сценарии из базы знаний) -->
+  <!-- HOW IT WORKS (creative capabilities from KB) -->
   <section class="section section--alt" id="how-it-works">
     <div class="container">
       <div class="section__header reveal">
@@ -1504,44 +1504,56 @@
           <span>Сценарии</span>
         </div>
         <h2 class="text-h1 section__title">Что умеет <span class="text-gradient">Клот</span></h2>
-        <p class="text-body section__subtitle">Реальные сценарии из документации бота v1.25 — от транскрипции до деплоя и биллинга</p>
+        <p class="text-body section__subtitle">От разговоров с ИИ до деплоя на сервер — всё в одном диалоге</p>
       </div>
       
-      <div class="steps">
-        <div class="step reveal">
-          <div class="step__number">🎤</div>
-          <h3 class="text-h4 step__title">Транскрипция голоса, аудио и видео</h3>
-          <p class="step__desc">Whisper API — отправьте голосовое, кружок или видеофайл. Бот скачивает, транскрибирует, обсуждает содержание. Поддержка больших файлов с чанкингом до 50 МБ.</p>
+      <div class="features__grid">
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--purple">🧠</div>
+          <h3 class="feature-card__title">Мульти-мозг</h3>
+          <p class="feature-card__desc">GPT / Claude / DeepSeek / Gemini / OpenRouter — выбирайте модель под задачу. Контекстная память, сброс через /new, провайдер через /profile.</p>
         </div>
         
-        <div class="step reveal">
-          <div class="step__number">📄</div>
-          <h3 class="text-h4 step__title">Intake-документов (v1.25)</h3>
-          <p class="step__desc">Любой файл стейджится в ~/inbox/intake/, задача из caption выполняется через полный чат-путь. PDF, DOCX, TXT — текст встраивается в память; zip и бинарники — модель читает инструментами.</p>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--pink">🎙</div>
+          <h3 class="feature-card__title">Медиа-центр</h3>
+          <p class="feature-card__desc">Голос → текст, видео → субтитры (Whisper, чанкинг до 50 MB). Генерация картинок (Gemini 2.5 Flash). Office-документы: Word, Excel, PowerPoint — за секунду.</p>
         </div>
         
-        <div class="step reveal">
-          <div class="step__number">🧠</div>
-          <h3 class="text-h4 step__title">Граф знаний (LightRAG)</h3>
-          <p class="step__desc">Voyage embeddings + семантический поиск. Сохраняйте факты, задавайте вопросы в hybrid/local/global-режимах. Бот помнит контекст между диалогами — личная база знаний каждого тенанта.</p>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--cyan">🌐</div>
+          <h3 class="feature-card__title">Интернет + данные</h3>
+          <p class="feature-card__desc">Поиск в вебе (Exa AI), bash на VPS, Supabase-аудит, календарь (iCloud + Google), напоминания по расписанию.</p>
         </div>
         
-        <div class="step reveal">
-          <div class="step__number">🐳</div>
-          <h3 class="text-h4 step__title">Автофиксер рантайм-багов</h3>
-          <p class="step__desc">Мониторит journalctl. При ошибке — алерт в Telegram, Claude создаёт ветку autofix/<id> и предлагает исправление. Push в main только после подтверждения. Semantic Versioning (SemVer).</p>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--green">👥</div>
+          <h3 class="feature-card__title">Армия агентов</h3>
+          <p class="feature-card__desc">250+ субагентов: Code Reviewer, Security Engineer, Marketing Lead, FP&A Analyst, UX Architect и другие. Отделы-дирижёры и конвейеры для сложных проектов.</p>
         </div>
         
-        <div class="step reveal">
-          <div class="step__number">🛠️</div>
-          <h3 class="text-h4 step__title">Оркестратор 250+ субагентов</h3>
-          <p class="step__desc">spawn_agent(role, task) — каждый агент выполняется в изолированном контексте с системным промптом из public.skills. Доступны: Code Reviewer, Security Engineer, Marketing Lead, FP&A Analyst и другие.</p>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--amber">💾</div>
+          <h3 class="feature-card__title">Вечная память</h3>
+          <p class="feature-card__desc">LightRAG граф знаний с семантическим поиском (hybrid / local / global). Сохраняйте факты между диалогами. Еженедельная сводка с событиями календаря.</p>
         </div>
         
-        <div class="step reveal">
-          <div class="step__number">💳</div>
-          <h3 class="text-h4 step__title">Коммерческий биллинг (v1.17)</h3>
-          <p class="step__desc">Prepaid-биллинг через public.tenant_balance + billing_ledger. Гости имеют изолированную базу знаний и allowlist инструментов (chat_only). Блокировка на нулевом балансе — работа продолжается сразу после пополнения.</p>
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--indigo">🔒</div>
+          <h3 class="feature-card__title">Твоя песочница</h3>
+          <p class="feature-card__desc">Изоляция тенантов — каждый в своей базе знаний. Свои / мастер-ключи (🤝). Биллинг $, prepaid, статистика /usage. Блокировка на нуле — включение сразу после пополнения.</p>
+        </div>
+        
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--rose">🛠</div>
+          <h3 class="feature-card__title">Продвинутые инструменты</h3>
+          <p class="feature-card__desc">Deep Research (5 агентов: веб + YouTube + конкурентная разведка). Code Review, Git-деплой, проект-менеджер, калькулятор, intake документов (PDF/DOCX/TXT/zip).</p>
+        </div>
+        
+        <div class="feature-card reveal">
+          <div class="feature-card__icon feature-card__icon--blue">🐳</div>
+          <h3 class="feature-card__title">Автофиксер</h3>
+          <p class="feature-card__desc">Мониторинг journalctl. При падении — алерт в Telegram, Claude создаёт ветку autofix/&lt;id&gt; с исправлением. Push в main только после вашего OK. SemVer.</p>
         </div>
       </div>
     </div>
