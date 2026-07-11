@@ -2,6 +2,8 @@
 
 Одностраничный сайт для Telegram-бота "Клот" — персонального AI-помощника с доступом к VPS и командой из 250+ специализированных субагентов.
 
+🌐 **Сайт-лендинг:** [https://lexanderus.github.io/Claude-bot-landing-page/](https://lexanderus.github.io/Claude-bot-landing-page/)
+
 ## Как создать своего бота и подключить к VPS
 
 ### Шаг 1. Создайте бота
