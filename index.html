@@ -1179,6 +1179,57 @@
       font-weight: bold;
     }
 
+    /* Modal table and highlights */
+    .modal__highlight {
+      background: rgba(139, 92, 246, 0.1);
+      border-left: 3px solid var(--accent-violet);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 8px;
+      margin-bottom: var(--space-md);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .modal__highlight code {
+      color: var(--accent-cyan);
+    }
+
+    .modal__table {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: var(--space-md);
+    }
+
+    .modal__table-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md);
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+    }
+
+    .modal__table-row:last-child {
+      border-bottom: none;
+    }
+
+    .modal__table-head {
+      background: rgba(139, 92, 246, 0.15);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-violet);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .modal__table-row code {
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+    }
+
     /* ============ SCROLL REVEAL ANIMATIONS ============ */
     .reveal {
       opacity: 0;
@@ -1807,11 +1858,11 @@
       </div>
       
       <div style="text-align:center;margin-top:var(--space-8);">
-        <button class="btn btn-primary btn-lg"  style="cursor:pointer;">
+        <button class="btn btn-primary btn-lg" id="openManual" style="cursor:pointer;--btn-glow: var(--accent-violet);">
           <span>📖</span>
           <span>Полная инструкция пользователя</span>
         </button>
-        <p class="text-small" style="margin-top:var(--space-3);">Настройки, календарь, BYOK, транскрипция — всё в одном гайде</p>
+        <p class="text-small" style="margin-top:var(--space-3); font-size:0.9rem; color:var(--text-muted);">Настройки, календарь, BYOK, транскрипция — всё в одном гайде</p>
       </div>
     </div>
   </section>
@@ -1889,128 +1940,130 @@
   </section>
 
   <!-- GUIDE MODAL -->
-  <div class="modal-overlay" id="guideModal">
-    <div class="modal" role="dialog" aria-modal="true" aria-label="Полная инструкция пользователя">
+  <div class="modal" id="guideModal" role="dialog" aria-modal="true" aria-label="Полная инструкция пользователя">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
       <div class="modal__header">
         <div class="modal__title">📖 Полная инструкция пользователя</div>
-        <button class="modal__close" onclick="document.getElementById('guideModal').classList.remove('active')" aria-label="Закрыть">✕</button>
+        <button class="modal__close" id="closeModal" aria-label="Закрыть">✕</button>
       </div>
       <div class="modal__body">
-        <h2>Как пользоваться ботом — инструкция для гостя</h2>
+        <h3>Как пользоваться ботом — инструкция для гостя</h3>
 
-        <p>Это твой личный ИИ-ассистент в Telegram на базе Claude. Просто пиши ему — как другу в переписке.</p>
+        <p>Это твой личный ИИ-ассистент в Telegram. Просто пиши ему — как другу в переписке.</p>
 
-        <blockquote>Твой бот изолирован: твоя переписка и память видны только тебе, другие пользователи и владелец сервера их не читают.</blockquote>
+        <div class="modal__highlight">Твой бот изолирован: твоя переписка и память видны только тебе, другие пользователи и владелец сервера их не читают.</div>
 
-        <blockquote><strong>⚙️ Главное меню — <code>/menu</code>.</strong> Все настройки собраны в одной панели: модель, провайдер, ключи, память, расход, статус.</blockquote>
+        <div class="modal__highlight">⚙️ Все настройки в <code>/menu</code>: модель, провайдер, ключи, память, расход, статус.</div>
 
         <h3>1. Обычный разговор</h3>
-        <p>Просто напиши сообщение — бот ответит. Он помнит ход беседы.</p>
+        <p>Просто напиши сообщение — бот ответит и помнит беседу.</p>
         <ul>
-          <li><code>/new</code> — начать новый разговор с чистого листа</li>
-          <li><code>/cancel</code> — прервать то, что бот сейчас делает</li>
-          <li>Если ответ длинный — бот пришлёт его файлом <code>.txt</code></li>
+          <li><code>/new</code> — начать с чистого листа</li>
+          <li><code>/cancel</code> — прервать задачу</li>
+          <li>Длинные ответы — файлом <code>.txt</code></li>
         </ul>
 
-        <h3>2. Голосовые, аудио и видео → текст</h3>
-        <p>Отправь голосовое сообщение, аудиофайл или видео — бот распознает речь (Whisper).</p>
-        <p><strong>🔊 Голосовые ответы:</strong> напиши голосовым — бот ответит голосом. Включи <code>/tts on</code>, чтобы озвучивать любые ответы.</p>
-        <p><strong>Транскрипт + действие:</strong> приложи к видео инструкцию — бот расшифрует и выполнит (сделает презентацию, конспект, перевод).</p>
+        <h3>2. Голосовые и видео → текст</h3>
+        <p>Отправь голосовое, аудио или видео — бот распознает речь (Whisper).</p>
+        <ul>
+          <li>🔊 Ответь голосовым — бот ответит голосом</li>
+          <li><code>/tts on</code> — озвучивать любые ответы</li>
+          <li>Приложи инструкцию к видео — бот расшифрует и выполнит</li>
+        </ul>
 
         <h3>3. Картинки</h3>
         <ul>
-          <li>Прислал фото → бот опишет, ответит на вопросы</li>
-          <li>Попросил нарисовать → бот сгенерирует изображение</li>
-          <li>Прислал фото + просьба изменить → бот отредактирует</li>
+          <li>Прислал фото → опишет и ответит на вопросы</li>
+          <li>«Нарисуй …» → сгенерирует изображение</li>
+          <li>Прислал + попросил изменить → отредактирует</li>
         </ul>
 
-        <h3>4. Документы</h3>
-        <p>Отправь файл (PDF, Word, Excel, PowerPoint, txt) — бот прочитает и ответит по содержимому.</p>
+        <h3>4. Документы и файлы</h3>
+        <p>Отправь PDF, Word, Excel, PowerPoint, txt — бот прочитает и ответит. Ссылки (YouTube, Google Drive) — скачает до ~2 ГБ.</p>
 
-        <h3>5. Генерация файлов</h3>
+        <h3>5. Генерация Office-файлов</h3>
         <ul>
-          <li>«Сделай презентацию про X на 5 слайдов» → <code>.pptx</code></li>
-          <li>«Оформи это документом Word» → <code>.docx</code></li>
-          <li>«Собери таблицу Excel» → <code>.xlsx</code> (с формулами)</li>
+          <li>«Сделай презентацию про X» → <code>.pptx</code></li>
+          <li>«Оформи документом» → <code>.docx</code></li>
+          <li>«Собери таблицу» → <code>.xlsx</code> с формулами</li>
         </ul>
 
-        <h3>6. Скачивание по ссылке</h3>
-        <p>Пришли ссылку (YouTube, Vimeo, Google Drive, Dropbox) — бот скачает и обработает. Большие файлы до ~2 ГБ.</p>
-
-        <h3>7. Долговременная память 🧠</h3>
+        <h3>6. Долговременная память 🧠</h3>
         <ul>
-          <li>«Запомни, что …» / «Сохрани, что …» — запишет в базу знаний</li>
-          <li>«Что я говорил про X?» / «Помнишь про …?» — найдёт</li>
-          <li>«Забудь про X» — удалит конкретное</li>
-          <li><code>/kb</code> — открыть память, посмотреть, что хранится</li>
+          <li>«Запомни, что …» — запишет в базу знаний</li>
+          <li>«Что я говорил про X?» — найдёт</li>
+          <li>«Забудь про X» — удалит</li>
+          <li><code>/kb</code> — просмотр всех сохранений</li>
         </ul>
 
-        <h3>8. Выбор модели и провайдера</h3>
+        <h3>7. Выбор модели и провайдера</h3>
         <ul>
           <li><code>/model</code> — выбрать модель (💰 = платная/мощнее)</li>
           <li><code>/profile</code> — сменить провайдера</li>
           <li><code>/status</code> — какая модель активна</li>
         </ul>
 
-        <h3>9. Свои ключи (BYOK)</h3>
+        <h3>8. Свои ключи (BYOK)</h3>
         <ul>
-          <li><code>/keys</code> — статус: 🔑 свой / 🤝 мастера / ⛔ недоступен</li>
-          <li><code>/setkey</code> — добавить свой ключ провайдера</li>
-          <li><code>/delkey</code> — убрать свой ключ</li>
+          <li><code>/keys</code> — статус ключей</li>
+          <li><code>/setkey</code> — добавить свой ключ</li>
+          <li><code>/delkey</code> — вернуться на ключ мастера</li>
         </ul>
 
-        <h3>10. Календарь 📅 (iCloud + Google)</h3>
-        <p>Подключи iCloud или Google — управляй событиями из чата. <code>/menu → 📅 Календарь</code></p>
+        <h3>9. Календарь 📅 (iCloud + Google)</h3>
         <ul>
-          <li>«Что запланировано на неделе?» — покажет события</li>
-          <li>«Создай встречу … завтра в 15:00» — добавит</li>
-          <li>«Перенеси … на 16:00» / «Переименуй» / «Удали»</li>
-          <li>«Напоминай каждый день в 9:00» — повтор (только Google)</li>
+          <li>«Что запланировано?» — покажет события</li>
+          <li>«Создай встречу … завтра в 15:00»</li>
+          <li>«Перенеси … на 16:00» / «Удали»</li>
+          <li>«Напоминай каждый день» — (только Google)</li>
         </ul>
 
-        <h3>11. Сколько потрачено</h3>
-        <p><code>/usage</code> — токены и стоимость за сегодня / 7 / 30 дней. <code>/balance</code> — баланс и пополнение.</p>
+        <h3>10. Расход и баланс</h3>
+        <p><code>/usage</code> — токены и стоимость. <code>/balance</code> — пополнение.</p>
+        <p>Еженедельная сводка: дайджест сохранений и событий.</p>
 
-        <h3>11a. Еженедельная сводка 📅</h3>
-        <p>Раз в неделю — дайджест: что сохранил в память, события календаря, что нового в боте.</p>
+        <h3>11. Все команды</h3>
+        <div class="modal__table">
+          <div class="modal__table-row modal__table-head">
+            <span>Команда</span><span>Что делает</span>
+          </div>
+          <div class="modal__table-row"><span><code>/start</code></span><span>приветствие</span></div>
+          <div class="modal__table-row"><span><code>/help</code></span><span>краткая справка</span></div>
+          <div class="modal__table-row"><span><code>/status</code></span><span>модель и состояние</span></div>
+          <div class="modal__table-row"><span><code>/model</code></span><span>выбрать модель ИИ</span></div>
+          <div class="modal__table-row"><span><code>/profile</code></span><span>сменить провайдера</span></div>
+          <div class="modal__table-row"><span><code>/new</code></span><span>новый разговор</span></div>
+          <div class="modal__table-row"><span><code>/cancel</code></span><span>прервать задачу</span></div>
+          <div class="modal__table-row"><span><code>/departments</code></span><span>список специалистов</span></div>
+          <div class="modal__table-row"><span><code>/kb</code></span><span>долговременная память</span></div>
+          <div class="modal__table-row"><span><code>/keys</code></span><span>статус ключей</span></div>
+          <div class="modal__table-row"><span><code>/setkey</code></span><span>добавить ключ</span></div>
+          <div class="modal__table-row"><span><code>/delkey</code></span><span>убрать свой ключ</span></div>
+          <div class="modal__table-row"><span><code>/gcalauth</code></span><span>Google Calendar</span></div>
+          <div class="modal__table-row"><span><code>/usage</code></span><span>расход токенов</span></div>
+          <div class="modal__table-row"><span><code>/balance</code></span><span>баланс</span></div>
+          <div class="modal__table-row"><span><code>/admin</code></span><span>настройка (админ)</span></div>
+        </div>
 
-        <h3>12. Команды одним списком</h3>
-        <table>
-          <tr><th>Команда</th><th>Что делает</th></tr>
-          <tr><td><code>/start</code></td><td>приветствие</td></tr>
-          <tr><td><code>/help</code></td><td>краткая справка</td></tr>
-          <tr><td><code>/status</code></td><td>текущая модель и состояние</td></tr>
-          <tr><td><code>/model</code></td><td>выбрать модель ИИ</td></tr>
-          <tr><td><code>/profile</code></td><td>сменить провайдера</td></tr>
-          <tr><td><code>/new</code></td><td>новый разговор (сброс контекста)</td></tr>
-          <tr><td><code>/cancel</code></td><td>прервать текущую задачу</td></tr>
-          <tr><td><code>/departments</code></td><td>список отделов-специалистов</td></tr>
-          <tr><td><code>/kb</code></td><td>долговременная память</td></tr>
-          <tr><td><code>/keys</code></td><td>статус ключей провайдеров</td></tr>
-          <tr><td><code>/setkey</code></td><td>добавить/заменить ключ</td></tr>
-          <tr><td><code>/delkey</code></td><td>убрать свой ключ</td></tr>
-          <tr><td><code>/gcalauth</code></td><td>подключить Google Calendar</td></tr>
-          <tr><td><code>/usage</code></td><td>расход токенов и стоимость</td></tr>
-          <tr><td><code>/balance</code></td><td>баланс и пополнение</td></tr>
-          <tr><td><code>/admin</code></td><td>настройка моделей (админ)</td></tr>
-        </table>
+        <h3>12. Создать своего бота</h3>
+        <ul>
+          <li><strong>1.</strong> @BotFather → <code>/newbot</code> → токен</li>
+          <li><strong>2.</strong> @userinfobot → свой user_id</li>
+          <li><strong>3.</strong> Отправь токен + user_id @VPSAndromedaBot</li>
+        </ul>
 
-        <h3>13. Как завести такого бота</h3>
-        <p><strong>Шаг 1.</strong> Открой <a href="https://t.me/BotFather" target="_blank">@BotFather</a>, отправь <code>/newbot</code>, получи токен.</p>
-        <p><strong>Шаг 2.</strong> Напиши <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a> — узнай свой user_id.</p>
-        <p><strong>Шаг 3.</strong> Отправь токен и user_id владельцу сервера или в чат <strong>@VPSAndromedaBot</strong>.</p>
-
-        <h3>Команда специалистов</h3>
-        <p>Если владелец включил режим «команды» — на сложную задачу бот привлекает узких агентов. <code>/departments</code> — список отделов.</p>
+        <h3>13. Команда специалистов</h3>
+        <p>На сложную задачу бот привлекает узких агентов. <code>/departments</code> — список отделов.</p>
 
         <h3>Чего бот не делает</h3>
-        <p>Не хранит твои файлы на сервере (обрабатывает «на лету»). Не выполняет команды на сервере (только мастер-версия).</p>
+        <p>Не хранит файлы на сервере (обрабатывает на лету). Не выполняет команды на сервере (только мастер-версия).</p>
 
         <h3>Если что-то не работает</h3>
         <ul>
           <li>Бот молчит → напиши владельцу сервера</li>
-          <li>Не дошёл большой файл → сообщи владельцу</li>
-          <li>Ошибка модели → попробуй <code>/model</code> другую модель</li>
+          <li>Не дошёл файл → сообщи владельцу</li>
+          <li>Ошибка модели → попробуй <code>/model</code> другую</li>
         </ul>
       </div>
     </div>
@@ -2157,45 +2210,38 @@
     countElements.forEach(el => countObserver.observe(el));
     
     // Modal functionality
-    const manualModal = document.getElementById('guideModal');
-    const openManualBtn = document.querySelector('[onclick*="guideModal"]');
+    const guideModal = document.getElementById('guideModal');
+    const openManualBtn = document.getElementById('openManual');
     const closeModalBtn = document.getElementById('closeModal');
-    const modalOverlay = document.getElementById('modalOverlay');
     
-    function openModal() {{
-      if (!manualModal) return;
-      manualModal.classList.add('active');
-      manualModal.setAttribute('aria-hidden', 'false');
+    function openModal() {
+      if (!guideModal) return;
+      guideModal.classList.add('active');
       document.body.style.overflow = 'hidden';
       if (closeModalBtn) closeModalBtn.focus();
-    }}
+    }
     
-    function closeModal() {{
-      if (!manualModal) return;
-      manualModal.classList.remove('active');
-      manualModal.setAttribute('aria-hidden', 'true');
+    function closeModal() {
+      if (!guideModal) return;
+      guideModal.classList.remove('active');
       document.body.style.overflow = '';
-    }}
+    }
     
-    // Wire up the "Полная инструкция" button
-    if (openManualBtn) {{
-      openManualBtn.addEventListener('click', openModal);
-    }}
-    // Also wire any button with id="openManual"
-    const manualBtn = document.getElementById('openManual');
-    if (manualBtn) {{
-      manualBtn.addEventListener('click', openModal);
-    }}
-    
+    if (openManualBtn) openManualBtn.addEventListener('click', openModal);
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
     
-    // Close modal on Escape key
-    document.addEventListener('keydown', (e) => {{
-      if (e.key === 'Escape' && manualModal && manualModal.classList.contains('active')) {{
+    // Close on overlay click
+    if (guideModal) {
+      const overlay = guideModal.querySelector('.modal__overlay');
+      if (overlay) overlay.addEventListener('click', closeModal);
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && guideModal && guideModal.classList.contains('active')) {
         closeModal();
-      }}
-    }});
+      }
+    });
   </script>
 
 </body>
